@@ -57,3 +57,4 @@ module.exports = {
   cleanTables,
   seedUsers
 };
+
