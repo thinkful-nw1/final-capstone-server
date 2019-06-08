@@ -10,7 +10,7 @@ usersRouter.post('/', jsonBodyParser, (req, res, next) => {
   const newUserData = { username, email, password };
 
   for (const [key, value] of Object.entries(newUserData))
-    if (value === null)
+    if (value == null)
       return res
         .status(400)
         .json({ error: `Missing '${key}' in request body` });
