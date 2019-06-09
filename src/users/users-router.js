@@ -28,25 +28,25 @@ usersRouter.post('/', jsonBodyParser, (req, res, next) => {
         hasUserWithEmail => {
           if (hasUserWithEmail)
             return res.status(400).json({ error: 'Email already registered' });
+
+          return UsersService.hashPassword(password).then(hashedPassword => {
+            const newUser = {
+              username,
+              email,
+              password: hashedPassword
+            };
+
+            return UsersService.insertUser(req.app.get('db'), newUser).then(
+              user => {
+                res
+                  .status(201)
+                  .location(path.posix.join(req.originalUrl, `/${user.id}`))
+                  .json(UsersService.serializeUser(user));
+              }
+            );
+          });
         }
       );
-
-      return UsersService.hashPassword(password).then(hashedPassword => {
-        const newUser = {
-          username,
-          email,
-          password: hashedPassword
-        };
-
-        return UsersService.insertUser(req.app.get('db'), newUser).then(
-          user => {
-            res
-              .status(201)
-              .location(path.posix.join(req.originalUrl, `/${user.id}`))
-              .json(UsersService.serializeUser(user));
-          }
-        );
-      });
     })
     .catch(next);
 });
