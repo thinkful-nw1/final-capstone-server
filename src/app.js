@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 
 const userRouter = require('./users/users-router');
+const flightsRouter = require('./flights/flights-router');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(helmet());
 
 app.use('/api/users', userRouter);
+app.use('/api/flights', flightsRouter);
 
 app.get('/', (req, res) => {
   res.send('Travel App API');
