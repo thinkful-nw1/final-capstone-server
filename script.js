@@ -20,9 +20,19 @@ function getWeather(lat, long, timestamp) {
 
 function displayWeather(responseJson){
     console.log(responseJson)
-    $('#results-list').empty()
+    $('#weather').empty()
+    
+    $('#weather').append(
+        `<ul>
+            <h3>${responseJson[currently].summary}</h3>
+            <p>${responseJson[currently].precipProbability}</p>
+            <p>${responseJson[currently].precipType} </p>
+            <p>${responseJson[currently].temperature}</p>
+            <p>${responseJson[currently].apparentTemperature}</p>
+        </ul>`
+    )
 }
-
+        
 function getEvents(){
     const apiKey= 'F1YG3M7FUGeHVW79Jwoj1GJK9QQyKzKR'
     const destination = 'New York'
@@ -36,9 +46,25 @@ function getEvents(){
         .then(resJson => console.log(JSON.stringify(resJson)))
 }
 
+function displayEvents(){
+    console.log(resJson)
+    const eventResults = resJson[embedded][events]
+    $('#events').empty()
+
+    for (let i =0; i < eventResults.length; i++ )
+        $('#events').append(
+            $('#results-list').append(
+                `<li>
+                    <h3><a href="${eventResults[i].url}>${eventResults[i].name}</a></h3>
+                    <p>${responseJson.items[i].snippet.description}</p>
+                    <img src='${responseJson.items[i].snippet.thumbnails.default.url}'>
+                </li>`
+            )
+        )
+}
 
 
-function watchForm() {
+function watchForm(){
     $('flight-search-form').submit(event => {
       event.preventDefault()
       getWeather();
