@@ -18,13 +18,30 @@ function getWeather(lat, long, timestamp) {
         })
 }
 
+function displayWeather(responseJson){
+    console.log(responseJson)
+    $('#results-list').empty()
+}
+
+function getEvents(){
+    const apiKey= 'F1YG3M7FUGeHVW79Jwoj1GJK9QQyKzKR'
+    const destination = 'New York'
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?city=${destination}&startDateTime=${departs}&endDateTime=${returns}&apiKey=${apiKey}`)
+        .then(res => {
+            if (res.ok) {
+                return res.json(); 
+            }
+            throw new Error(res.statusText)
+        })
+        .then(resJson => console.log(JSON.stringify(resJson)))
+}
+
 
 
 function watchForm() {
     $('flight-search-form').submit(event => {
-      event.preventDefault();
-    
-    getWeather();
+      event.preventDefault()
+      getWeather();
     });
 }
 

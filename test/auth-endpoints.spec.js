@@ -5,8 +5,7 @@ const helpers = require('./test-helpers')
 describe('Auth Endpoints', function() {
   let db
 
-  const { testUsers } = helpers.makeUsersArray(); 
-  console.log(`*****${testUsers}*******`)
+  const testUsers  = helpers.makeUsersArray(); 
   const testUser = testUsers[0]; 
 
   before('make knex instance', () => {
@@ -37,10 +36,8 @@ describe('Auth Endpoints', function() {
             email: testUser.email, 
             password: testUser.password
         }
-
         it.only(`responds with 400 required error when ${field} is missing`, () => {
             delete loginAttemptBody[field]
-
             return supertest(app)
                 .post('/api/auth/login')
                 .send(loginAttemptBody)
@@ -48,6 +45,7 @@ describe('Auth Endpoints', function() {
                     error: `Missing ${field} in request body`
                 })
         })
+
     })
   })
 })
