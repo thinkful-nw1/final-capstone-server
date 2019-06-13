@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 
+const authRouter = require('./auth/auth-router');
 const userRouter = require('./users/users-router');
 const flightsRouter = require('./flights/flights-router');
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(helmet());
 
 app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/flights', flightsRouter);
 
 app.get('/', (req, res) => {
