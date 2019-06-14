@@ -36,7 +36,7 @@ describe('Auth Endpoints', function() {
             email: testUser.email, 
             password: testUser.password
         }
-        it.only(`responds with 400 required error when ${field} is missing`, () => {
+        it(`responds with 400 required error when ${field} is missing`, () => {
             delete loginAttemptBody[field]
             return supertest(app)
                 .post('/api/auth/login')
