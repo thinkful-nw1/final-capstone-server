@@ -21,13 +21,6 @@ flightsRouter.post('/', jsonBodyParser, (req, res, next) => {
     from_date
   };
 
-  //   [newFlightSearch.from_date[1], newFlightSearch.from_date[2]] = [
-  //     newFlightSearch.from_date[2],
-  //     newFlightSearch.from_date[1]
-  //   ];
-
-  //   newFlightSearch.from_date = newFlightSearch.from_date.join('-');
-
   for (const [key, value] of Object.entries(newFlightSearch))
     if (value == null)
       return res
@@ -70,13 +63,15 @@ flightsRouter.post('/', jsonBodyParser, (req, res, next) => {
   newFlightSearch.from_date = new Date(newFlightSearch.from_date.join('-'));
   newFlightSearch.to_date = new Date(newFlightSearch.to_date.join('-'));
 
-  console.log('TOOOO', newFlightSearch.to_date);
-  console.log('FROMM', newFlightSearch.from_date);
-
-  if (newFlightSearch.to_date.getTime() == newFlightSearch.from_date.getTime())
+  if (newFlightSearch.to_date.getTime() === newFlightSearch.from_date.getTime())
     return res
       .status(400)
       .json({ error: `'to_date' and 'from_date' cannot be the same` });
+
+  if (newFlightSearch.to_date.getTime() < newFlightSearch.from_date.getTime())
+    return res
+      .status(400)
+      .json({ error: `'to_date' cant be before 'from_date'` });
 });
 
 module.exports = flightsRouter;

@@ -133,7 +133,7 @@ describe.only('Flights Endpoint', () => {
           });
       });
 
-      it.skip(`responds with 400 error when 'to_date' is before 'from_date'`, () => {
+      it(`responds with 400 error when 'to_date' is before 'from_date'`, () => {
         const flightSearchBody = {
           to_destination: 'LGA',
           from_destination: 'CAE',
