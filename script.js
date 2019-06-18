@@ -23,13 +23,13 @@ function displayWeather(responseJson){
     $('#weather').empty()
     
     $('#weather').append(
-        `<ul>
+        `<span>
             <h3>${responseJson[currently].summary}</h3>
             <p>${responseJson[currently].precipProbability}</p>
             <p>${responseJson[currently].precipType} </p>
             <p>${responseJson[currently].temperature}</p>
             <p>${responseJson[currently].apparentTemperature}</p>
-        </ul>`
+        </span>`
     )
 }
         
