@@ -1,5 +1,5 @@
 const express = require('express');
-const FlightService = require('./flights-service');
+const FlightsService = require('./flights-service');
 
 const flightsRouter = express.Router();
 const jsonBodyParser = express.json();
@@ -27,12 +27,12 @@ flightsRouter.post('/', jsonBodyParser, (req, res, next) => {
         .status(400)
         .json({ error: `Missing '${key}' in request body` });
 
-  if (!FlightService.validateAirportCode(to_destination))
+  if (!FlightsService.validateAirportCode(to_destination))
     return res
       .status(400)
       .json({ error: `Incorrect airport code in 'to_destination'` });
 
-  if (!FlightService.validateAirportCode(from_destination))
+  if (!FlightsService.validateAirportCode(from_destination))
     return res
       .status(400)
       .json({ error: `Incorrect airport code in 'from_destination'` });
@@ -51,15 +51,6 @@ flightsRouter.post('/', jsonBodyParser, (req, res, next) => {
   newFlightSearch.from_date = newFlightSearch.from_date.split('-');
   newFlightSearch.to_date = newFlightSearch.to_date.split('-');
 
-  [newFlightSearch.from_date[1], newFlightSearch.from_date[2]] = [
-    newFlightSearch.from_date[2],
-    newFlightSearch.from_date[1]
-  ];
-  [newFlightSearch.to_date[1], newFlightSearch.to_date[2]] = [
-    newFlightSearch.to_date[2],
-    newFlightSearch.to_date[1]
-  ];
-
   newFlightSearch.from_date = new Date(newFlightSearch.from_date.join('-'));
   newFlightSearch.to_date = new Date(newFlightSearch.to_date.join('-'));
 
@@ -72,6 +63,12 @@ flightsRouter.post('/', jsonBodyParser, (req, res, next) => {
     return res
       .status(400)
       .json({ error: `'to_date' cant be before 'from_date'` });
+
+  FlightsService.getFlights(newFlightSearch)
+    .then(results => {
+      return res.send(FlightsService.formatResults(results.itins));
+    })
+    .catch(err => res.status(400).json(err));
 });
 
 module.exports = flightsRouter;

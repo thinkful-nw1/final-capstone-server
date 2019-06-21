@@ -16,8 +16,8 @@ describe.only('Flights Endpoint', () => {
         const flightSearchAttemptBody = {
           to_destination: 'LGA',
           from_destination: 'CAE',
-          to_date: '2019-30-6',
-          from_date: '2019-27-6',
+          to_date: '2019-6-30',
+          from_date: '2019-6-27',
           passengers: 1
         };
 
@@ -35,8 +35,8 @@ describe.only('Flights Endpoint', () => {
         const flightSearchBody = {
           to_destination: 'ZZZ',
           from_destination: 'CAE',
-          to_date: '2019-30-6',
-          from_date: '2019-27-6',
+          to_date: '2019-6-30',
+          from_date: '2019-6-27',
           passengers: 1
         };
 
@@ -52,8 +52,8 @@ describe.only('Flights Endpoint', () => {
         const flightSearchBody = {
           to_destination: 'LGA',
           from_destination: 'ZZZ',
-          to_date: '2019-30-6',
-          from_date: '2019-27-6',
+          to_date: '2019-6-30',
+          from_date: '2019-6-27',
           passengers: 1
         };
 
@@ -69,8 +69,8 @@ describe.only('Flights Endpoint', () => {
         const flightSearchBody = {
           to_destination: 'LGA',
           from_destination: 'CAE',
-          to_date: '2019-30-6',
-          from_date: '2019-27-6',
+          to_date: '2019-6-30',
+          from_date: '2019-6-27',
           passengers: 0
         };
 
@@ -86,8 +86,8 @@ describe.only('Flights Endpoint', () => {
         const flightSearchBody = {
           to_destination: 'LGA',
           from_destination: 'CAE',
-          to_date: '2019-30-6',
-          from_date: '2019-27-6',
+          to_date: '2019-6-30',
+          from_date: '2019-6-27',
           passengers: 99
         };
 
@@ -103,8 +103,8 @@ describe.only('Flights Endpoint', () => {
         const flightSearchBody = {
           to_destination: 'LGA',
           from_destination: 'LGA',
-          to_date: '2019-30-6',
-          from_date: '2019-27-6',
+          to_date: '2019-6-30',
+          from_date: '2019-6-27',
           passengers: 1
         };
 
@@ -120,8 +120,8 @@ describe.only('Flights Endpoint', () => {
         const flightSearchBody = {
           to_destination: 'LGA',
           from_destination: 'CAE',
-          from_date: '2019-27-6',
-          to_date: '2019-27-6',
+          from_date: '2019-6-27',
+          to_date: '2019-6-27',
           passengers: 1
         };
 
@@ -137,8 +137,8 @@ describe.only('Flights Endpoint', () => {
         const flightSearchBody = {
           to_destination: 'LGA',
           from_destination: 'CAE',
-          from_date: '2019-27-6',
-          to_date: '2019-20-6',
+          from_date: '2019-6-27',
+          to_date: '2019-6-20',
           passengers: 1
         };
 
